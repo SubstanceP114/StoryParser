@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Input\" />
     <Folder Include="Output\" />
     <Folder Include="Scripts\" />
   </ItemGroup>

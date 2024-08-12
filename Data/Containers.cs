@@ -10,7 +10,7 @@ namespace StoryParser.Data
                 statements.Add(Statement.Create(fileName, lineIndex, statement.Split(Seperators.line)));
         }
         private List<Statement> statements;
-        public static bool Accelerate { get; private set; }
+        public static bool Accelerate { get; set; }
         public async void Execute()
         {
             Accelerate = false;
@@ -29,6 +29,7 @@ namespace StoryParser.Data
     public class File
     {
         private List<Line> lines = new();
+        public int Length => lines.Count;
         public void AddLine(string fileName, int lineIndex, string line)
         {
             if (line[0] != Seperators.note)
@@ -39,6 +40,7 @@ namespace StoryParser.Data
     public class Folder
     {
         private Dictionary<string, File> files = new();
+        public int Count => files.Count;
         public void AddFile(string name) => files.Add(name, new());
         public File this[string name] => files[name];
     }
