@@ -1,7 +1,7 @@
 namespace StoryParser.Data
 {
     /// <summary>
-    /// 继承类请务必通过<see cref="Dispatcher.RegisterDispatcher"/>进行注册
+    /// 继承类请务必编写相应的调度器，再通过<see cref="Dispatcher.RegisterDispatcher"/>注册调度器
     /// </summary>
     public abstract class Statement
     {
