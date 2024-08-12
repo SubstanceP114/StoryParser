@@ -1,4 +1,5 @@
 using StoryParser.Data;
+using StoryParser.Setting;
 using System.Text;
 
 namespace StoryParser.Input
@@ -8,7 +9,7 @@ namespace StoryParser.Input
         static IntermediateFile()
         {
             folders = new();
-            folderName = "Default";
+            folderName = Global.DefaultFolderName;
             EnterFolder(folderName);
         }
         private static Dictionary<string, Folder> folders;
@@ -45,7 +46,8 @@ namespace StoryParser.Input
                 await Task.Run(() =>
                 {
                     while ((line = sr.ReadLine()) != null)
-                        Current[name].AddLine(name, Current[name].Length, line);
+                        if (line[0] != Seperators.note)
+                            Current[name].AddLine(name, Current[name].Length, line);
                 });
             }
             Loaded?.Invoke();
@@ -65,7 +67,8 @@ namespace StoryParser.Input
             {
                 string? line;
                 while ((line = sr.ReadLine()) != null)
-                    Current[name].AddLine(name, Current[name].Length, line);
+                    if (line[0] != Seperators.note)
+                        Current[name].AddLine(name, Current[name].Length, line);
             }
             Loaded?.Invoke();
         }

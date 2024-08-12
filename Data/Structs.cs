@@ -1,9 +1,9 @@
 using StoryParser.Setting;
-using System.Numerics;
 using SaveData = StoryParser.Archive.SaveData;
-namespace Data
+
+namespace StoryParser.Data
 {
-    public record struct Rect
+    public struct Rect
     {
         public Rect(string parameter)
         {
@@ -20,9 +20,9 @@ namespace Data
             Left = left;
             Right = right;
         }
-        public float Up, Down, Left, Right;
+        public readonly float Up, Down, Left, Right;
     }
-    public record struct ImageInfo
+    public struct ImageInfo
     {
         public ImageInfo(string parameter)
         {
@@ -38,9 +38,9 @@ namespace Data
             Angle = angle;
         }
         public Rect Bounds;
-        public float Alpha, Angle;
+        public readonly float Alpha, Angle;
     }
-    public record struct Condition
+    public struct Condition
     {
         public Condition(string parameter)
         {
@@ -65,7 +65,7 @@ namespace Data
             return false;
         }
     }
-    public record struct Conditions
+    public struct Conditions
     {
         public Conditions(string parameter)
         {
@@ -81,5 +81,15 @@ namespace Data
                     return false;
             return true;
         }
+    }
+    public struct Locator
+    {
+        public Locator(string fileName, int lineIndex)
+        {
+            FileName = fileName;
+            LineIndex = lineIndex;
+        }
+        public readonly string FileName;
+        public readonly int LineIndex;
     }
 }
