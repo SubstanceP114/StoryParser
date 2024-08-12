@@ -1,4 +1,4 @@
-﻿namespace StoryParser.Setting
+namespace StoryParser.Setting
 {
     internal static class Seperators
     {
@@ -6,5 +6,6 @@
         internal readonly static char line = '^';
         internal readonly static char parameter = ' ';
         internal readonly static char[] signals = new char[] { '>', '<' };
+        internal readonly static char note = '#';
     }
 }

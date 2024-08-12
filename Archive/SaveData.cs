@@ -1,4 +1,4 @@
-﻿using StoryParser.Setting;
+using StoryParser.Setting;
 using System.Text;
 using System.Text.Json;
 namespace StoryParser.Archive

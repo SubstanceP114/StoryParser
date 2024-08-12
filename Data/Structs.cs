@@ -1,45 +1,46 @@
-﻿using StoryParser.Setting;
+using StoryParser.Setting;
+using System.Numerics;
 using SaveData = StoryParser.Archive.SaveData;
 namespace Data
 {
-    public struct Rect
+    public record struct Rect
     {
         public Rect(string parameter)
         {
             string[] infos = parameter.Split(Seperators.parameter);
-            up = float.Parse(infos[0]);
-            down = float.Parse(infos[1]);
-            left = float.Parse(infos[2]);
-            right = float.Parse(infos[3]);
+            Up = float.Parse(infos[0]);
+            Down = float.Parse(infos[1]);
+            Left = float.Parse(infos[2]);
+            Right = float.Parse(infos[3]);
         }
         public Rect(float up, float down, float left, float right)
         {
-            this.up = up;
-            this.down = down;
-            this.left = left;
-            this.right = right;
+            Up = up;
+            Down = down;
+            Left = left;
+            Right = right;
         }
-        public float up, down, left, right;
+        public float Up, Down, Left, Right;
     }
-    public struct ImageInfo
+    public record struct ImageInfo
     {
         public ImageInfo(string parameter)
         {
             string[] infos = parameter.Split(Seperators.parameter);
-            bounds = new Rect(float.Parse(infos[0]), float.Parse(infos[1]), float.Parse(infos[2]), float.Parse(infos[3]));
-            alpha = infos.Length > 4 ? float.Parse(infos[4]) : 0;
-            angle = infos.Length > 5 ? float.Parse(infos[5]) : 0;
+            Bounds = new Rect(float.Parse(infos[0]), float.Parse(infos[1]), float.Parse(infos[2]), float.Parse(infos[3]));
+            Alpha = infos.Length > 4 ? float.Parse(infos[4]) : 0;
+            Angle = infos.Length > 5 ? float.Parse(infos[5]) : 0;
         }
         public ImageInfo(float up, float down, float left, float right, float alpha = 0, float angle = 0)
         {
-            bounds = new Rect(up, down, left, right);
-            this.alpha = alpha;
-            this.angle = angle;
+            Bounds = new Rect(up, down, left, right);
+            Alpha = alpha;
+            Angle = angle;
         }
-        public Rect bounds;
-        public float alpha, angle;
+        public Rect Bounds;
+        public float Alpha, Angle;
     }
-    public struct Condition
+    public record struct Condition
     {
         public Condition(string parameter)
         {
@@ -64,7 +65,7 @@ namespace Data
             return false;
         }
     }
-    public struct Conditions
+    public record struct Conditions
     {
         public Conditions(string parameter)
         {
