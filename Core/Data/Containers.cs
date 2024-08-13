@@ -1,6 +1,6 @@
-using StoryParser.Setting;
+using StoryParser.Core.Setting;
 
-namespace StoryParser.Data
+namespace StoryParser.Core.Data
 {
     public class Line
     {

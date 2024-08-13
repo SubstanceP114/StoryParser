@@ -1,6 +1,6 @@
-using StoryParser.Data;
+using StoryParser.Core.Data;
 
-namespace StoryParser.Input
+namespace StoryParser.Core.Input
 {
     public static class Executor
     {

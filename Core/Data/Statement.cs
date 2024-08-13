@@ -1,4 +1,4 @@
-namespace StoryParser.Data
+namespace StoryParser.Core.Data
 {
     /// <summary>
     /// 继承类请务必编写相应的调度器，再通过<see cref="Dispatcher.RegisterDispatcher"/>注册调度器

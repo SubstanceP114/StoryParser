@@ -1,7 +1,7 @@
-using StoryParser.Setting;
-using SaveData = StoryParser.Archive.SaveData;
+using StoryParser.Core.Setting;
+using SaveData = StoryParser.Core.Archive.SaveData;
 
-namespace StoryParser.Data
+namespace StoryParser.Core.Data
 {
     public struct Condition
     {

@@ -1,7 +1,7 @@
-using StoryParser.Setting;
+using StoryParser.Core.Setting;
 using System.Text;
 using System.Text.Json;
-namespace StoryParser.Archive
+namespace StoryParser.Core.Archive
 {
     public static class SaveData
     {

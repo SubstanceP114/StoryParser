@@ -1,7 +1,6 @@
+using StoryParser.Core.Data;
 
-using StoryParser.Setting;
-
-namespace StoryParser.Data.Statements
+namespace StoryParser.Extension.Statements
 {
     public class SayStatement : Statement
     {

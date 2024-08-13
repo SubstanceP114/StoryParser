@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Output\" />
-    <Folder Include="Scripts\" />
+    <Folder Include="Core\Output\" />
+    <Folder Include="ImmediateFiles\" />
   </ItemGroup>
 
 </Project>

@@ -1,6 +1,4 @@
-using StoryParser.Data.Statements;
-
-namespace StoryParser.Data
+namespace StoryParser.Core.Data
 {
     public abstract class Dispatcher
     {
@@ -21,10 +19,5 @@ namespace StoryParser.Data
             => dispatchers.Add(dispatcher.name, dispatcher);
         public static Statement Execute(string[] parameters)
             => dispatchers[parameters[0]].Dispatch(parameters);
-    }
-    public class SayDispatcher : Dispatcher
-    {
-        public SayDispatcher(string name) : base(name) { }
-        protected override SayStatement Dispatch(string[] parameters) => new SayStatement(parameters);
     }
 }

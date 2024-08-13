@@ -1,8 +1,8 @@
-using StoryParser.Data;
-using StoryParser.Setting;
+using StoryParser.Core.Setting;
+using StoryParser.Core.Data;
 using System.Text;
 
-namespace StoryParser.Input
+namespace StoryParser.Core.Input
 {
     public static class IntermediateFile
     {

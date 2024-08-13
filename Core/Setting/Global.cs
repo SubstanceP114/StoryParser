@@ -1,4 +1,4 @@
-namespace StoryParser.Setting
+namespace StoryParser.Core.Setting
 {
     public static class Global
     {
