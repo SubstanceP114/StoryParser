@@ -1,5 +1,5 @@
 using StoryParser.Core.Util;
-using StoryParser.Core.Data;
+using StoryParser.Core.Statement;
 using System.Text;
 
 namespace StoryParser.Core.Input
@@ -46,7 +46,7 @@ namespace StoryParser.Core.Input
                 await Task.Run(() =>
                 {
                     while ((line = sr.ReadLine()) != null)
-                        if (line[0] != Seperators.note)
+                        if (line[0] != Global.Comment)
                             Current[name].AddLine(name, Current[name].Length, line);
                 });
             }
@@ -67,7 +67,7 @@ namespace StoryParser.Core.Input
             {
                 string? line;
                 while ((line = sr.ReadLine()) != null)
-                    if (line[0] != Seperators.note)
+                    if (line[0] != Global.Comment)
                         Current[name].AddLine(name, Current[name].Length, line);
             }
             Loaded?.Invoke();

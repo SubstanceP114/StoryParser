@@ -1,5 +1,5 @@
 using StoryParser.Core.Util;
-using StoryParser.Core.Data;
+using StoryParser.Core.Statement;
 
 namespace StoryParser.Core.Input
 {

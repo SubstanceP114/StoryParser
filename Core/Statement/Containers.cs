@@ -1,17 +1,17 @@
 using StoryParser.Core.Util;
 
-namespace StoryParser.Core.Data
+namespace StoryParser.Core.Statement
 {
     public class Line
     {
         public Line(string fileName, int lineIndex, string line)
         {
-            statements = new();
-            foreach (string statement in line.Split(Seperators.line))
-                statements.Add(Statement.Create(fileName, lineIndex, statement.Split(Seperators.line)));
             Position = new Locator(fileName, lineIndex);
+            statements = new();
+            foreach (string statement in line.Split(Seperators.Line))
+                statements.Add(Dispatcher.Execute(statement.Split(Seperators.Line)));
         }
-        private List<Statement> statements;
+        private List<IStatement> statements;
         public Locator Position { get; private set; }
         public Task Execute()
         {

@@ -38,7 +38,7 @@ namespace StoryParser.Extension.Util
         public Conditions(string parameter)
         {
             list = new();
-            foreach (string info in parameter.Split(Seperators.parameter))
+            foreach (string info in parameter.Split(Seperators.Parameter))
                 list.Add(new Condition(info));
         }
         private List<Condition> list;

@@ -1,10 +1,9 @@
 namespace StoryParser.Core.Util
 {
-    internal static class Seperators
+    public static class Seperators
     {
-        internal readonly static char statement = '|';
-        internal readonly static char line = '^';
-        internal readonly static char parameter = ' ';
-        internal readonly static char note = '#';
+        public readonly static char Statement = '|';
+        public readonly static char Line = '^';
+        public readonly static char Parameter = ' ';
     }
 }
