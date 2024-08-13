@@ -5,7 +5,7 @@ namespace StoryParser.Extension.Statements
 {
     public class IfStatement : IStatement
     {
-        public IfStatement(Conditions conditions, string target)
+        public IfStatement(List<Condition> conditions, string target)
         {
             this.conditions = conditions;
             this.target = target;
@@ -14,7 +14,7 @@ namespace StoryParser.Extension.Statements
         {
 
         });
-        private Conditions conditions;
+        private List<Condition> conditions;
         private string target;
     }
 }

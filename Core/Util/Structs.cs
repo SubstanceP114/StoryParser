@@ -1,6 +1,6 @@
 namespace StoryParser.Core.Util
 {
-    public struct Locator
+    public readonly struct Locator
     {
         public Locator(string fileName, int lineIndex)
         {

@@ -3,51 +3,50 @@ using SaveData = StoryParser.Core.Archive.SaveData;
 
 namespace StoryParser.Extension.Util
 {
-    public struct Condition
+    public readonly struct Condition
     {
-        public Condition(string parameter)
+        public Condition(string variable)
         {
-            char[] signals = new char[] { '>', '<', '=' };
-            string[] infos = parameter.Split(signals);
-            variable = infos[0];
-            if (infos.Length == 2)
-            {
-                value = int.Parse(infos[1]);
-                signal = parameter[parameter.IndexOfAny(signals)];
-            }
+            Variable = variable;
         }
-        private string variable;
-        private char? signal;
-        private int? value;
-        public static implicit operator bool(Condition condition)
+        public Condition(string variable, char signal, int value)
         {
-            if (!SaveData.TryGetVariable(condition.variable, out int value))
-                return false; // 找不到变量则为假
-            return condition.signal switch
-            {
-                null => true, // 已找到变量且无需比较则为真
-                '>' => value > condition.value,
-                '<' => value < condition.value,
-                '=' => value == condition.value,
-                _ => false,
-            };
+            Variable = variable;
+            Signal = signal;
+            Value = value;
         }
+        public readonly string Variable;
+        public readonly char? Signal;
+        public readonly int? Value;
+        //public static implicit operator bool(Condition condition)
+        //{
+        //    if (!SaveData.TryGetVariable(condition.Variable, out int value))
+        //        return false; // 找不到变量则为假
+        //    return condition.Signal switch
+        //    {
+        //        null => true, // 已找到变量且无需比较则为真
+        //        '>' => value > condition.Value,
+        //        '<' => value < condition.Value,
+        //        '=' => value == condition.Value,
+        //        _ => false,
+        //    };
+        //}
     }
-    public struct Conditions
+    public readonly struct Option
     {
-        public Conditions(string parameter)
+        public Option(string description)
         {
-            list = new();
-            foreach (string info in parameter.Split(Seperators.Parameter))
-                list.Add(new Condition(info));
+            Description = description;
         }
-        private List<Condition> list;
-        public static implicit operator bool(Conditions conditions)
+        public Option(string description, string variable, int value)
         {
-            foreach (var condition in conditions.list)
-                if (!condition)
-                    return false;
-            return true;
+            Description = description;
+            Variable = variable;
+            Value = value;
         }
+        public readonly string Description;
+        public readonly string? Variable;
+        public readonly int? Value;
+        public static implicit operator string(Option option) => option.Description;
     }
 }

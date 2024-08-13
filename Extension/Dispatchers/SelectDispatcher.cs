@@ -5,27 +5,26 @@ using StoryParser.Extension.Util;
 
 namespace StoryParser.Extension.Dispatchers
 {
-    public class IfDispatcher : IDispatcher
+    public class SelectDispatcher : IDispatcher
     {
-        private char[] signals = new char[] { '>', '<', '=' };
-        private List<Condition>? conditions;
+        private List<Option>? options;
         private string[]? infos;
         public IStatement Dispatch(string[] parameters)
         {
-            if (parameters.Length != 3)
+            if (parameters.Length < 2)
                 throw new ArgumentException(string.Format("{0}数组长度有误", parameters), nameof(parameters));
-            conditions = new();
-            foreach (var info in parameters[1].Split(Separators.Parameter))
+            options = new();
+            for (int i = 1; i < parameters.Length; i++)
             {
-                infos = info.Split(signals);
-                conditions.Add(infos.Length switch
+                infos = parameters[i].Split(Separators.Parameter);
+                options.Add(infos.Length switch
                 {
-                    1 => new Condition(info),
-                    2 => new Condition(infos[0], info[info.IndexOfAny(signals)], int.Parse(infos[1])),
+                    1 => new Option(parameters[i]),
+                    3 => new Option(infos[0], infos[1], int.Parse(infos[2])),
                     _ => throw new ArgumentException(string.Format("{0}条件声明有误", parameters), nameof(parameters)),
                 });
             }
-            return new IfStatement(conditions, parameters[2]);
+            return new SelectStatement(options);
         }
     }
 }
