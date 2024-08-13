@@ -1,4 +1,4 @@
-using StoryParser.Core.Setting;
+using StoryParser.Core.Util;
 using StoryParser.Core.Data;
 using System.Text;
 

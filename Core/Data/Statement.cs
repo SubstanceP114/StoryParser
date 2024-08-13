@@ -1,3 +1,5 @@
+using StoryParser.Core.Util;
+
 namespace StoryParser.Core.Data
 {
     /// <summary>

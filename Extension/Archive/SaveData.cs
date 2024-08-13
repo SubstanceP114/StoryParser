@@ -1,6 +1,3 @@
-using StoryParser.Core.Setting;
-using System.Text;
-using System.Text.Json;
 namespace StoryParser.Core.Archive
 {
     public static class SaveData
@@ -9,7 +6,7 @@ namespace StoryParser.Core.Archive
         {
             try
             {
-                Info = JsonSerializer.Deserialize<GlobalInfo>(File.ReadAllText(Global.ArchivePath, Encoding.UTF8));
+                //Info = JsonSerializer.Deserialize<GlobalInfo>(File.ReadAllText(Global.ArchivePath, Encoding.UTF8));
             }
             catch
             {
@@ -69,14 +66,14 @@ namespace StoryParser.Core.Archive
         /// 保存当前进度到指定存档
         /// </summary>
         /// <param name="name">存档名称</param>
-        public static async void Save(string name)
-        {
-            Saving?.Invoke(Info);
-            Info.Files.Remove(name);
-            Info.Files.Add(name, Current);
-            await Task.Run(() => File.WriteAllText(Global.ArchivePath, JsonSerializer.Serialize(Info), Encoding.UTF8));
-            Saved?.Invoke(Info);
-        }
+        //public static async void Save(string name)
+        //{
+        //    Saving?.Invoke(Info);
+        //    Info.Files.Remove(name);
+        //    Info.Files.Add(name, Current);
+        //    await Task.Run(() => File.WriteAllText(Global.ArchivePath, JsonSerializer.Serialize(Info), Encoding.UTF8));
+        //    Saved?.Invoke(Info);
+        //}
         /// <summary>
         /// 加载指定存档
         /// </summary>

@@ -1,7 +1,7 @@
-using StoryParser.Core.Setting;
+using StoryParser.Core.Util;
 using SaveData = StoryParser.Core.Archive.SaveData;
 
-namespace StoryParser.Core.Data
+namespace StoryParser.Extension.Util
 {
     public struct Condition
     {
@@ -49,15 +49,5 @@ namespace StoryParser.Core.Data
                     return false;
             return true;
         }
-    }
-    public struct Locator
-    {
-        public Locator(string fileName, int lineIndex)
-        {
-            FileName = fileName;
-            LineIndex = lineIndex;
-        }
-        public readonly string FileName;
-        public readonly int LineIndex;
     }
 }

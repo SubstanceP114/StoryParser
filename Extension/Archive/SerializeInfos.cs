@@ -1,5 +1,3 @@
-using StoryParser.Core.Setting;
-
 namespace StoryParser.Core.Archive
 {
     public struct GlobalInfo

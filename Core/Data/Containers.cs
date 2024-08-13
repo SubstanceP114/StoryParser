@@ -1,4 +1,4 @@
-using StoryParser.Core.Setting;
+using StoryParser.Core.Util;
 
 namespace StoryParser.Core.Data
 {
