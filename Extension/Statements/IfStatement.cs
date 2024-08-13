@@ -5,8 +5,10 @@ namespace StoryParser.Extension.Statements
 {
     public class IfStatement : IStatement
     {
-        public IfStatement()
+        public IfStatement(Conditions conditions, string target)
         {
+            this.conditions = conditions;
+            this.target = target;
         }
         public Task Command() => new(() =>
         {
