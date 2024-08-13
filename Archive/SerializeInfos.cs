@@ -1,20 +1,9 @@
-﻿using StoryParser.Setting;
+using StoryParser.Setting;
 
 namespace StoryParser.Archive
 {
     public struct GlobalInfo
     {
-        // 这里主要是为了存档考虑
-        public float TextInterval
-        {
-            get { return Global.TextInterval; }
-            set { Global.TextInterval = value; }
-        }
-        public float FadeTime
-        {
-            get { return Global.FadeTime; }
-            set { Global.FadeTime = value; }
-        }
         public Dictionary<string, int> GlobalVariables { get; set; }
         public Dictionary<string, LocalInfo> Files { get; set; }
     }
