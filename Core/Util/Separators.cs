@@ -2,8 +2,9 @@ namespace StoryParser.Core.Util
 {
     public static class Separators
     {
-        public readonly static char Statement = '|';
-        public readonly static char Line = '^';
-        public readonly static char Parameter = ' ';
+        public static char Parameter { get; set; } = ' ';
+        public static char Statement { get; set; } = '|';
+        public static char Line { get; set; } = '^';
+        public static char Comment { get; set; } = '#';
     }
 }

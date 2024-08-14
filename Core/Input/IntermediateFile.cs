@@ -1,5 +1,5 @@
-using StoryParser.Core.Util;
 using StoryParser.Core.Statement;
+using StoryParser.Core.Util;
 using System.Text;
 
 namespace StoryParser.Core.Input
@@ -8,26 +8,9 @@ namespace StoryParser.Core.Input
     {
         static IntermediateFile()
         {
-            folders = new();
-            folderName = Global.DefaultFolderName;
-            EnterFolder(folderName);
+            Current = new();
         }
-        private static Dictionary<string, Folder> folders;
-        private static string folderName;
-        /// <summary>
-        /// 当前文件夹
-        /// </summary>
-        public static Folder Current => folders[folderName];
-        /// <summary>
-        /// 进入指定文件夹
-        /// </summary>
-        /// <param name="name">文件夹名称</param>
-        public static void EnterFolder(string name)
-        {
-            if (!folders.ContainsKey(name))
-                folders.Add(name, new());
-            folderName = name;
-        }
+        public static Dictionary<string, Statement.File> Current;
         public static event Action? Loading;
         public static event Action? Loaded;
         /// <summary>
@@ -39,17 +22,32 @@ namespace StoryParser.Core.Input
         public async static void LoadAsync(string name, Stream stream, Encoding encoding)
         {
             Loading?.Invoke();
-            Current.AddFile(name);
+            Current.Add(name, new());
             using (StreamReader sr = new StreamReader(stream, encoding))
             {
                 string? line;
                 await Task.Run(() =>
                 {
                     while ((line = sr.ReadLine()) != null)
-                        if (line[0] != Global.Comment)
-                            Current[name].AddLine(name, Current[name].Length, line);
+                        Current[name].AddLine(name, Current[name].Length, line);
                 });
             }
+            Loaded?.Invoke();
+        }
+        /// <summary>
+        /// 异步读取指定中间文件
+        /// <param name="name">文件名（并非路径，只是用于标识）</param>
+        /// <param name="content">文本内容</param>
+        /// </summary>
+        public async static void LoadAsync(string name, string[] content)
+        {
+            Loading?.Invoke();
+            Current.Add(name, new());
+            await Task.Run(() =>
+            {
+                foreach (string line in content)
+                    Current[name].AddLine(line, Current[name].Length, line);
+            });
             Loaded?.Invoke();
         }
         /// <summary>
@@ -62,14 +60,26 @@ namespace StoryParser.Core.Input
         public static void Load(string name, Stream stream, Encoding encoding)
         {
             Loading?.Invoke();
-            Current.AddFile(name);
+            Current.Add(name, new());
             using (StreamReader sr = new StreamReader(stream, encoding))
             {
                 string? line;
                 while ((line = sr.ReadLine()) != null)
-                    if (line[0] != Global.Comment)
-                        Current[name].AddLine(name, Current[name].Length, line);
+                    Current[name].AddLine(name, Current[name].Length, line);
             }
+            Loaded?.Invoke();
+        }
+        /// <summary>
+        /// 异步读取指定中间文件
+        /// <param name="name">文件名（并非路径，只是用于标识）</param>
+        /// <param name="content">文本内容</param>
+        /// </summary>
+        public static void Load(string name, string[] content)
+        {
+            Loading?.Invoke();
+            Current.Add(name, new());
+            foreach (string line in content)
+                Current[name].AddLine(line, Current[name].Length, line);
             Loaded?.Invoke();
         }
     }

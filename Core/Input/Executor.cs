@@ -6,9 +6,26 @@ namespace StoryParser.Core.Input
     public static class Executor
     {
         public static Locator Position { get; private set; }
+        internal static bool Pause { get; set; }
+        private static int count;
+        /// <summary>
+        /// 开始执行一系列语句
+        /// </summary>
         public static event Action? Executing;
+        /// <summary>
+        /// 一系列语句执行完毕
+        /// </summary>
         public static event Action? Executed;
-        public static Line CurrentLine => IntermediateFile.Current[Position];
+        /// <summary>
+        /// 开始处理一行语句
+        /// </summary>
+        public static event Action<Locator>? LineProcessing;
+        /// <summary>
+        /// 一行语句处理完毕
+        /// </summary>
+        public static event Action<Locator>? LineProcessed;
+        public static Line CurrentLine =>
+            IntermediateFile.Current[Position.FileName][Position.LineIndex];
         /// <summary>
         /// 定位到指定文件的指定行数
         /// </summary>
@@ -28,17 +45,26 @@ namespace StoryParser.Core.Input
         public static void Locate(Locator position) => Position = position;
         private static void NextLine()
             => Locate(Position.FileName, Position.LineIndex + 1);
-        // 防止反复Execute，支持语句加速执行
-        private static int executeCount = 0;
-        public static bool Accelerate => executeCount > 2;
+        private static void Launch(int count) => Executor.count = count;
+        /// <summary>
+        /// 语句执行完毕
+        /// </summary>
+        public static void Complete() => count--;
         public async static void Execute()
         {
-            executeCount++;
-            if (executeCount > 1) return;
             Executing?.Invoke();
-            await CurrentLine.Execute();
+            Pause = false;
+            while (!Pause)
+                await Process();
             Executed?.Invoke();
-            executeCount = 0;
+        }
+        private async static Task Process()
+        {
+            LineProcessing?.Invoke(Position);
+            Launch(CurrentLine.Length);
+            CurrentLine.Execute();
+            await Task.Run(() => count == 0);
+            LineProcessed?.Invoke(Position);
             NextLine();
         }
     }

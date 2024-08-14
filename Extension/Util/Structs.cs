@@ -32,21 +32,21 @@ namespace StoryParser.Extension.Util
         //    };
         //}
     }
-    public readonly struct Option
-    {
-        public Option(string description)
-        {
-            Description = description;
-        }
-        public Option(string description, string variable, int value)
-        {
-            Description = description;
-            Variable = variable;
-            Value = value;
-        }
-        public readonly string Description;
-        public readonly string? Variable;
-        public readonly int? Value;
-        public static implicit operator string(Option option) => option.Description;
-    }
+    //public readonly struct Option
+    //{
+    //    public Option(string description)
+    //    {
+    //        Description = description;
+    //    }
+    //    public Option(string description, string variable, int value)
+    //    {
+    //        Description = description;
+    //        Variable = variable;
+    //        Value = value;
+    //    }
+    //    public readonly string Description;
+    //    public readonly string? Variable;
+    //    public readonly int? Value;
+    //    public static implicit operator string(Option option) => option.Description;
+    //}
 }

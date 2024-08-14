@@ -10,8 +10,7 @@ namespace StoryParser.Core.Statement
         /// <summary>
         /// 该语句对应的指令
         /// </summary>
-        /// <returns>该指令应当执行的任务</returns>
-        Task Command();
+        void Execute();
     }
     /// <summary>
     /// 调度器应当实现该接口，再通过<see cref="Dispatcher.RegisterDispatcher"/>注册

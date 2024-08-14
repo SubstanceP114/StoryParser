@@ -1,23 +1,29 @@
 using StoryParser.Core.Statement;
 using StoryParser.Core.Util;
-using StoryParser.Extension.Statements;
 using StoryParser.Extension.Util;
 
-namespace StoryParser.Extension.Dispatchers
+namespace StoryParser.Extension.Statements
 {
-    public class IfDispatcher : IDispatcher
+    public class If : IStatement, IDispatcher
     {
-        private char[] signals = new char[] { '>', '<', '=' };
-        private List<Condition>? conditions;
-        private string[]? infos;
+        public If(List<Condition> conditions, string target)
+        {
+            Conditions = conditions;
+            Target = target;
+        }
+        public void Execute()
+        {
+
+        }
         public IStatement Dispatch(string[] parameters)
         {
             if (parameters.Length != 3)
                 throw new ArgumentException(string.Format("{0}数组长度有误", parameters), nameof(parameters));
-            conditions = new();
+            List<Condition> conditions = new();
+            char[] signals = new char[] { '>', '<', '=' };
             foreach (var info in parameters[1].Split(Separators.Parameter))
             {
-                infos = info.Split(signals);
+                string[] infos = info.Split(signals);
                 conditions.Add(infos.Length switch
                 {
                     1 => new Condition(info),
@@ -25,7 +31,9 @@ namespace StoryParser.Extension.Dispatchers
                     _ => throw new ArgumentException(string.Format("{0}条件声明有误", parameters), nameof(parameters)),
                 });
             }
-            return new IfStatement(conditions, parameters[2]);
+            return new If(conditions, parameters[2]);
         }
+        public readonly List<Condition> Conditions;
+        public readonly string Target;
     }
 }
