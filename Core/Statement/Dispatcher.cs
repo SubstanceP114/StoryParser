@@ -16,7 +16,6 @@ namespace StoryParser.Core.Statement
         public static void RegisterDispatcher(string name, IDispatcher dispatcher)
             => dispatchers.Add(name, dispatcher);
         internal static IStatement Execute(string[] parameters)
-            => parameters[0][0] == Separators.Comment ?
-            new Void() : dispatchers[parameters[0]].Dispatch(parameters);
+            => dispatchers[parameters[0]].Dispatch(parameters);
     }
 }

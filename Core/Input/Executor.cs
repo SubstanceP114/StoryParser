@@ -9,6 +9,14 @@ namespace StoryParser.Core.Input
         private static bool pause;
         private static int count;
         /// <summary>
+        /// 开始处理文件
+        /// </summary>
+        public static event Action? FileProcessing;
+        /// <summary>
+        /// 文件处理完毕
+        /// </summary>
+        public static event Action? FileProcessed;
+        /// <summary>
         /// 执行了End语句
         /// </summary>
         public static event Action<int>? End;
