@@ -9,6 +9,10 @@ namespace StoryParser.Core.Input
         private static bool pause;
         private static int count;
         /// <summary>
+        /// 执行了End语句
+        /// </summary>
+        public static event Action<int>? End;
+        /// <summary>
         /// 开始执行一系列语句
         /// </summary>
         public static event Action? Executing;
@@ -60,6 +64,7 @@ namespace StoryParser.Core.Input
         /// 暂停语句执行,等待用户输入（再次调用<see cref="Execute"/>）
         /// </summary>
         public static void Pause() => pause = true;
+        internal static void EndWith(int value) => End?.Invoke(value);
         public async static void Execute()
         {
             Executing?.Invoke();

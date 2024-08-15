@@ -4,8 +4,6 @@ namespace StoryParser.Extension.Output
 {
     public static partial class Commands
     {
-        static partial void End(int value);
-        public static void EndCommand(int value) => End(value);
         static partial void Menu(string content, int target);
         public static void MenuCommand(string content, int target) => Menu(content, target);
         static partial void Say(string? character, string? sprite, string dialogue);
