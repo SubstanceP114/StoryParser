@@ -46,11 +46,6 @@ namespace StoryParser.Core.Input
         /// <summary>
         /// 定位到指定文件的指定行数
         /// </summary>
-        /// <param name="line">目标行</param>
-        public static void Locate(Line line) => Position = line.Position;
-        /// <summary>
-        /// 定位到指定文件的指定行数
-        /// </summary>
         /// <param name="line">目标位置</param>
         public static void Locate(Locator position) => Position = position;
         private static void NextLine()

@@ -26,11 +26,7 @@ namespace StoryParser.Core.Input
             using (StreamReader sr = new StreamReader(stream, encoding))
             {
                 string? line;
-                await Task.Run(() =>
-                {
-                    while ((line = sr.ReadLine()) != null)
-                        Current[name].AddLine(name, Current[name].Length, line);
-                });
+                await Task.Run(() => { while ((line = sr.ReadLine()) != null) Current[name].AddLine(line); });
             }
             Loaded?.Invoke();
         }
@@ -43,11 +39,7 @@ namespace StoryParser.Core.Input
         {
             Loading?.Invoke();
             Current.Add(name, new());
-            await Task.Run(() =>
-            {
-                foreach (string line in content)
-                    Current[name].AddLine(line, Current[name].Length, line);
-            });
+            await Task.Run(() => { foreach (string line in content) Current[name].AddLine(line); });
             Loaded?.Invoke();
         }
         /// <summary>
@@ -64,8 +56,7 @@ namespace StoryParser.Core.Input
             using (StreamReader sr = new StreamReader(stream, encoding))
             {
                 string? line;
-                while ((line = sr.ReadLine()) != null)
-                    Current[name].AddLine(name, Current[name].Length, line);
+                while ((line = sr.ReadLine()) != null) Current[name].AddLine(line);
             }
             Loaded?.Invoke();
         }
@@ -78,8 +69,7 @@ namespace StoryParser.Core.Input
         {
             Loading?.Invoke();
             Current.Add(name, new());
-            foreach (string line in content)
-                Current[name].AddLine(line, Current[name].Length, line);
+            foreach (string line in content) Current[name].AddLine(line);
             Loaded?.Invoke();
         }
     }
