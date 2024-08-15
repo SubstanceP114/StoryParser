@@ -11,7 +11,7 @@ namespace StoryParser.Core.Statement
         void Execute();
     }
     /// <summary>
-    /// 调度器应当实现该接口，再通过<see cref="Dispatcher.RegisterDispatcher"/>注册
+    /// 调度器应当实现该接口，再通过<see cref="Dispatcher.Register"/>注册
     /// </summary>
     public interface IDispatcher
     {
