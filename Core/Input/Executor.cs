@@ -70,10 +70,15 @@ namespace StoryParser.Core.Input
         internal static void EndWith(int value) => End?.Invoke(value);
         public async static void Execute()
         {
+            if (Position.LineIndex == CurrentLine.Length)
+            {
+                FileProcessed?.Invoke();
+                return;
+            }
+            if (Position.LineIndex == 0) FileProcessing?.Invoke();
             Executing?.Invoke();
             pause = false;
-            while (!pause)
-                await Process();
+            while (!pause) await Process();
             Executed?.Invoke();
         }
         private async static Task Process()
