@@ -28,7 +28,7 @@ namespace StoryParser.Extension.Statements
         }
         public void Execute()
         {
-            if (Conditions.All(Meet))
+            if (Conditions.Count == 0 || Conditions.All(Meet))
                 Executor.Locate(Target - 1);
             Executor.Complete();
         }
