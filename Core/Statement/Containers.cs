@@ -10,7 +10,7 @@ namespace StoryParser.Core.Statement
             Position = new Locator(fileName, lineIndex);
             statements = new();
             foreach (string statement in line.Split(Separators.Line))
-                statements.Add(Dispatcher.Execute(statement.Split(Separators.Line)));
+                statements.Add(Dispatcher.Execute(statement.Split(Separators.Statement)));
         }
         private List<IStatement> statements;
         public int Length => statements.Count;

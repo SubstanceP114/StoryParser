@@ -11,4 +11,8 @@ namespace StoryParser.Core.Statement
         }
         public IStatement Dispatch(string[] parameters) => new Pause();
     }
+    public class Void : IStatement
+    {
+        public void Execute() => Executor.Complete();
+    }
 }

@@ -1,3 +1,5 @@
+using StoryParser.Core.Util;
+
 namespace StoryParser.Core.Statement
 {
     public static class Dispatcher
@@ -11,6 +13,7 @@ namespace StoryParser.Core.Statement
         public static void RegisterDispatcher(string name, IDispatcher dispatcher)
             => dispatchers.Add(name, dispatcher);
         internal static IStatement Execute(string[] parameters)
-            => dispatchers[parameters[0]].Dispatch(parameters);
+            => parameters[0][0] == Separators.Comment ?
+            new Void() : dispatchers[parameters[0]].Dispatch(parameters);
     }
 }
