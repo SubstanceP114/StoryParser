@@ -13,7 +13,7 @@ namespace StoryParser.Extension.Statements
         public void Execute()
         {
             Commands.EndCommand(Value);
-            Executor.Pause = true;
+            Executor.Pause();
             Executor.Complete();
         }
         public IStatement Dispatch(string[] parameters)

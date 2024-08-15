@@ -6,7 +6,7 @@ namespace StoryParser.Core.Input
     public static class Executor
     {
         public static Locator Position { get; private set; }
-        public static bool Pause { get; set; }
+        private static bool pause;
         private static int count;
         /// <summary>
         /// 开始执行一系列语句
@@ -56,11 +56,15 @@ namespace StoryParser.Core.Input
         /// 语句执行完毕
         /// </summary>
         public static void Complete() => count--;
+        /// <summary>
+        /// 暂停语句执行,等待用户输入（再次调用<see cref="Execute"/>）
+        /// </summary>
+        public static void Pause() => pause = true;
         public async static void Execute()
         {
             Executing?.Invoke();
-            Pause = false;
-            while (!Pause)
+            pause = false;
+            while (!pause)
                 await Process();
             Executed?.Invoke();
         }

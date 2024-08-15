@@ -6,7 +6,7 @@ namespace StoryParser.Core.Statement
     {
         public void Execute()
         {
-            Executor.Pause = true;
+            Executor.Pause();
             Executor.Complete();
         }
         public IStatement Dispatch(string[] parameters) => new Pause();
