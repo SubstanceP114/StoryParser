@@ -1,5 +1,6 @@
 using StoryParser.Core.Statement;
 using StoryParser.Extension.Output;
+using System.Text.RegularExpressions;
 
 namespace StoryParser.Extension.Statements
 {
@@ -11,7 +12,15 @@ namespace StoryParser.Extension.Statements
             Sprite = sprite;
             Dialogue = dialogue;
         }
-        public void Execute() => Commands.SayCommand(Character, Sprite, Dialogue);
+        public void Execute()
+        {
+            var matches = Regex.Matches(Dialogue, @"(?<=\{)[^}]*(?=\})").Cast<Match>().ToList();
+            string dialogue = Dialogue;
+            foreach (var match in matches)
+                if (Commands.DataProvider!.TryGetString(match.ToString(), out string replace))
+                    dialogue = dialogue.Replace("{" + match + "}", replace);
+            Commands.SayCommand(Character, Sprite, dialogue);
+        }
         public IStatement Dispatch(string[] parameters)
         {
             if (parameters.Length != 4)
