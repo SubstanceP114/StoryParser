@@ -8,18 +8,18 @@ namespace StoryParser.Extension.Statements
     {
         public Say(string? character, string? sprite, string dialogue)
         {
-            Character = character;
-            Sprite = sprite;
-            Dialogue = dialogue;
+            this.character = character;
+            this.sprite = sprite;
+            this.dialogue = dialogue;
         }
         public void Execute()
         {
-            var matches = Regex.Matches(Dialogue, @"(?<=\{)[^}]*(?=\})").Cast<Match>().ToList();
-            string dialogue = Dialogue;
+            var matches = Regex.Matches(dialogue, @"(?<=\{)[^}]*(?=\})").Cast<Match>().ToList();
+            string copy = dialogue;
             foreach (var match in matches)
                 if (Commands.DataProvider!.TryGetString(match.ToString(), out string replace))
-                    dialogue = dialogue.Replace("{" + match + "}", replace);
-            Commands.SayCommand(Character, Sprite, dialogue);
+                    copy = copy.Replace("{" + match + "}", replace);
+            Commands.SayCommand(character, sprite, copy);
         }
         public IStatement Dispatch(string[] parameters)
         {
@@ -27,8 +27,8 @@ namespace StoryParser.Extension.Statements
                 throw new ArgumentException(string.Format("{0}数组长度有误", parameters), nameof(parameters));
             return new Say(parameters[1], parameters[2], parameters[3]);
         }
-        public readonly string? Character;
-        public readonly string? Sprite;
-        public readonly string Dialogue;
+        private readonly string? character;
+        private readonly string? sprite;
+        private readonly string dialogue;
     }
 }

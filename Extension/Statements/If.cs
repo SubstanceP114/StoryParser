@@ -10,8 +10,8 @@ namespace StoryParser.Extension.Statements
     {
         public If(List<Condition> conditions, int target)
         {
-            Conditions = conditions;
-            Target = target;
+            this.conditions = conditions;
+            this.target = target;
         }
         private bool Meet(Condition condition)
         {
@@ -28,8 +28,8 @@ namespace StoryParser.Extension.Statements
         }
         public void Execute()
         {
-            if (Conditions.Count == 0 || Conditions.All(Meet))
-                Executor.Locate(Target - 1);
+            if (conditions.Count == 0 || conditions.All(Meet))
+                Executor.Locate(target - 1);
             Executor.Complete();
         }
         public IStatement Dispatch(string[] parameters)
@@ -50,7 +50,7 @@ namespace StoryParser.Extension.Statements
             }
             return new If(conditions, int.Parse(parameters[2]));
         }
-        public readonly List<Condition> Conditions;
-        public readonly int Target;
+        private readonly List<Condition> conditions;
+        private readonly int target;
     }
 }

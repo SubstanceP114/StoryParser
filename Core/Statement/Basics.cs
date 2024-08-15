@@ -20,11 +20,11 @@ namespace StoryParser.Core.Statement
     {
         public End(int value)
         {
-            Value = value;
+            this.value = value;
         }
         public void Execute()
         {
-            Executor.EndWith(Value);
+            Executor.EndWith(value);
             Executor.Pause();
             Executor.Complete();
         }
@@ -34,6 +34,6 @@ namespace StoryParser.Core.Statement
                 throw new ArgumentException(string.Format("{0}数组长度有误", parameters), nameof(parameters));
             return new End(int.Parse(parameters[1]));
         }
-        public readonly int Value;
+        private readonly int value;
     }
 }
