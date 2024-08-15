@@ -1,19 +1,36 @@
+using StoryParser.Core.Input;
 using StoryParser.Core.Statement;
 using StoryParser.Core.Util;
+using StoryParser.Extension.Output;
 using StoryParser.Extension.Util;
 
 namespace StoryParser.Extension.Statements
 {
     public class If : IStatement, IDispatcher
     {
-        public If(List<Condition> conditions, string target)
+        public If(List<Condition> conditions, int target)
         {
             Conditions = conditions;
             Target = target;
         }
+        private bool Meet(Condition condition)
+        {
+            if (!Commands.DataProvider!.TryGetInt(condition.Variable, out int value))
+                return false; // 找不到变量则为假
+            return condition.Signal switch
+            {
+                null => true, // 已找到变量且无需比较则为真
+                '>' => value > condition.Value,
+                '<' => value < condition.Value,
+                '=' => value == condition.Value,
+                _ => false,
+            };
+        }
         public void Execute()
         {
-
+            if (Conditions.All(Meet))
+                Executor.Locate(Target - 1);
+            Executor.Complete();
         }
         public IStatement Dispatch(string[] parameters)
         {
@@ -31,9 +48,9 @@ namespace StoryParser.Extension.Statements
                     _ => throw new ArgumentException(string.Format("{0}条件声明有误", parameters), nameof(parameters)),
                 });
             }
-            return new If(conditions, parameters[2]);
+            return new If(conditions, int.Parse(parameters[2]));
         }
         public readonly List<Condition> Conditions;
-        public readonly string Target;
+        public readonly int Target;
     }
 }

@@ -27,6 +27,12 @@ namespace StoryParser.Core.Input
         public static Line CurrentLine =>
             IntermediateFile.Current[Position.FileName][Position.LineIndex];
         /// <summary>
+        /// 定位到指定行数
+        /// </summary>
+        /// <param name="lineIndex">目标行数</param>
+        public static void Locate(int lineIndex)
+            => Position = new Locator(Position.FileName, lineIndex);
+        /// <summary>
         /// 定位到指定文件的指定行数
         /// </summary>
         /// <param name="fileName">目标文件名称</param>

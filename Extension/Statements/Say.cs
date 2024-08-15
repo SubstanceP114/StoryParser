@@ -1,4 +1,5 @@
 using StoryParser.Core.Statement;
+using StoryParser.Extension.Output;
 
 namespace StoryParser.Extension.Statements
 {
@@ -10,10 +11,7 @@ namespace StoryParser.Extension.Statements
             Sprite = sprite;
             Dialogue = dialogue;
         }
-        public void Execute()
-        {
-
-        }
+        public void Execute() => Commands.SayCommand(Character, Sprite, Dialogue);
         public IStatement Dispatch(string[] parameters)
         {
             if (parameters.Length != 4)

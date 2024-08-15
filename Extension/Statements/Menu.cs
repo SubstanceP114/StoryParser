@@ -1,4 +1,5 @@
 using StoryParser.Core.Statement;
+using StoryParser.Extension.Output;
 
 namespace StoryParser.Extension.Statements
 {
@@ -9,10 +10,7 @@ namespace StoryParser.Extension.Statements
             Content = content;
             Target = target;
         }
-        public void Execute()
-        {
-
-        }
+        public void Execute() => Commands.MenuCommand(Content, Target);
         public IStatement Dispatch(string[] parameters)
         {
             if (parameters.Length != 3)

@@ -1,16 +1,15 @@
+using StoryParser.Core.Input;
 using StoryParser.Core.Statement;
 
 namespace StoryParser.Extension.Statements
 {
     public class Jump : IStatement, IDispatcher
     {
-        public Jump(int target)
-        {
-            Target = target;
-        }
+        public Jump(int target) => Target = target;
         public void Execute()
         {
-
+            Executor.Locate(Target - 1);
+            Executor.Complete();
         }
         public IStatement Dispatch(string[] parameters)
         {
