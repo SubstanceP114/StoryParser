@@ -6,7 +6,7 @@ namespace StoryParser.Core.Input
     public static class Executor
     {
         public static Locator Position { get; private set; }
-        internal static bool Pause { get; set; }
+        public static bool Pause { get; set; }
         private static int count;
         /// <summary>
         /// 开始执行一系列语句

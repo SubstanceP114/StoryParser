@@ -10,7 +10,7 @@ namespace StoryParser.Core.Statement
         /// <param name="dispatcher">调度器实例</param>
         public static void RegisterDispatcher(string name, IDispatcher dispatcher)
             => dispatchers.Add(name, dispatcher);
-        public static IStatement Execute(string[] parameters)
+        internal static IStatement Execute(string[] parameters)
             => dispatchers[parameters[0]].Dispatch(parameters);
     }
 }

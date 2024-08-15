@@ -5,7 +5,7 @@ namespace StoryParser.Core.Statement
 {
     public class Line
     {
-        public Line(string fileName, int lineIndex, string line)
+        internal Line(string fileName, int lineIndex, string line)
         {
             Position = new Locator(fileName, lineIndex);
             statements = new();
@@ -15,13 +15,13 @@ namespace StoryParser.Core.Statement
         private List<IStatement> statements;
         public int Length => statements.Count;
         public Locator Position { get; private set; }
-        public void Execute() => statements.ForEach(s => s.Execute());
+        internal void Execute() => statements.ForEach(s => s.Execute());
     }
     public class File
     {
         private List<Line> lines = new();
         public int Length => lines.Count;
-        public void AddLine(string fileName, int lineIndex, string line)
+        internal void AddLine(string fileName, int lineIndex, string line)
             => lines.Add(new Line(fileName, lineIndex, line));
         public Line this[int index] => lines[index];
     }
