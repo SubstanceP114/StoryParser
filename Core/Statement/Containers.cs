@@ -1,4 +1,3 @@
-using StoryParser.Core.Input;
 using StoryParser.Core.Util;
 
 namespace StoryParser.Core.Statement

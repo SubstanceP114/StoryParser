@@ -1,5 +1,4 @@
 using StoryParser.Core.Input;
-using StoryParser.Extension.Output;
 
 namespace StoryParser.Core.Statement
 {

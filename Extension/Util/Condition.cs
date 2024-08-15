@@ -1,5 +1,3 @@
-using StoryParser.Extension.Output;
-
 namespace StoryParser.Extension.Util
 {
     public readonly struct Condition
