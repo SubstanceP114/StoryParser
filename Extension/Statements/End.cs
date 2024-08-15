@@ -1,3 +1,4 @@
+using StoryParser.Core.Input;
 using StoryParser.Core.Statement;
 using StoryParser.Extension.Output;
 
@@ -9,7 +10,12 @@ namespace StoryParser.Extension.Statements
         {
             Value = value;
         }
-        public void Execute() => Commands.EndCommand(Value);
+        public void Execute()
+        {
+            Commands.EndCommand(Value);
+            Executor.Pause = true;
+            Executor.Complete();
+        }
         public IStatement Dispatch(string[] parameters)
         {
             if (parameters.Length != 2)
