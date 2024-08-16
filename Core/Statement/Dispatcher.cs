@@ -1,3 +1,5 @@
+using StoryParser.Extension;
+
 namespace StoryParser.Core.Statement
 {
     public static class Dispatcher
@@ -5,6 +7,10 @@ namespace StoryParser.Core.Statement
         private static Dictionary<string, IDispatcher> dispatchers = new() {
             { "PAUSE", new Pause() },
             { "END", new End(0) },
+            { "IF", new If(new(), 0) },
+            { "MENU", new Menu("", 0) },
+            { "SAY", new Say(null, null, "") },
+            { "VARY", new Var("", "", "", "") }
         };
         /// <summary>
         /// 注册调度器

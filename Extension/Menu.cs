@@ -1,7 +1,6 @@
 using StoryParser.Core.Statement;
-using StoryParser.Extension.Output;
 
-namespace StoryParser.Extension.Statements
+namespace StoryParser.Extension
 {
     public class Menu : IStatement, IDispatcher
     {
@@ -10,7 +9,7 @@ namespace StoryParser.Extension.Statements
             this.content = content;
             this.target = target;
         }
-        public void Execute() => Commands.MenuCommand(content, target);
+        public void Execute() => Commands.Menu(content, target);
         public IStatement Dispatch(string[] parameters)
         {
             if (parameters.Length != 3)

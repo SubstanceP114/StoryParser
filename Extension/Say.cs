@@ -1,8 +1,7 @@
 using StoryParser.Core.Statement;
-using StoryParser.Extension.Output;
 using System.Text.RegularExpressions;
 
-namespace StoryParser.Extension.Statements
+namespace StoryParser.Extension
 {
     public class Say : IStatement, IDispatcher
     {
@@ -17,9 +16,8 @@ namespace StoryParser.Extension.Statements
             var matches = Regex.Matches(dialogue, @"(?<=\{)[^}]*(?=\})").Cast<Match>().ToList();
             string copy = dialogue;
             foreach (var match in matches)
-                if (Commands.DataProvider!.TryGetString(match.ToString(), out string replace))
-                    copy = copy.Replace("{" + match + "}", replace);
-            Commands.SayCommand(character, sprite, copy);
+                copy = copy.Replace("{" + match + "}", Commands.GetValue(match.ToString()).ToString());
+            Commands.Say(character, sprite, copy);
         }
         public IStatement Dispatch(string[] parameters)
         {
@@ -27,8 +25,7 @@ namespace StoryParser.Extension.Statements
                 throw new ArgumentException(string.Format("{0}数组长度有误", parameters), nameof(parameters));
             return new Say(parameters[1], parameters[2], parameters[3]);
         }
-        private readonly string? character;
-        private readonly string? sprite;
+        private readonly string? character, sprite;
         private readonly string dialogue;
     }
 }
